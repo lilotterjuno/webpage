@@ -18,7 +18,7 @@
     "plugins": ["@typescript-eslint", "react"],
     "rules": {
         "quotes": ["warn", "double"],
-        "semi": ["error", "never"],
+        "semi": ["warn", "never"],
         "react/self-closing-comp": [
             "warn",
             {
@@ -27,6 +27,7 @@
             }
         ],
         "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-explicit-any": "off",
         "no-unused-vars": "warn"
     }
 }
