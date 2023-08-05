@@ -1,6 +1,6 @@
 import { FaGithub, FaTwitter } from "react-icons/fa"
 import { BrowserRouter } from "react-router-dom"
-import { NavItemProps, Navbar } from "./components"
+import { NavItemProps, Navbar, Separator } from "./components"
 import { Footer, SocialItemsProps } from "./components/Footer"
 import { CustomRoutes } from "./routes"
 
@@ -27,8 +27,12 @@ function App() {
                     />
                 </div>
 
-                <div className="flex-grow">
+                <div className="flex flex-grow justify-center px-52 py-20">
                     <CustomRoutes />
+                </div>
+
+                <div className="px-8">
+                    <Separator />
                 </div>
 
                 <div>

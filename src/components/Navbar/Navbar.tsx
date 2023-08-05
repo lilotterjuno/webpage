@@ -21,7 +21,7 @@ export const Navbar = (props: NavbarProps) => {
 
     return (
         <div
-            className="flex min-h-full items-center justify-between gap-12 bg-surface-_ p-12 text-h5 font-medium text-on-surface-variant"
+            className="flex min-h-full items-center justify-between gap-12 bg-surface-_ p-12 text-h5 font-medium text-on-surface-variant shadow-md"
             style={{
                 WebkitUserSelect: "none",
                 msUserSelect: "none",

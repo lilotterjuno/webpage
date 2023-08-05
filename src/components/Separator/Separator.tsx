@@ -5,7 +5,7 @@ interface SeparatorProps {
 export const Separator = ({ orientation = "horizontal" }: SeparatorProps) => {
     return (
         <hr
-            className={`border ${
+            className={`border text-neutral-variant-90 ${
                 orientation === "vertical" ? "h-full" : "w-full"
             }`}
         />
