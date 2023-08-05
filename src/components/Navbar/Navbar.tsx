@@ -2,13 +2,11 @@ import { motion } from "framer-motion"
 import React from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import { PolyComp } from "../PolymorphicComponent/PolyComp"
-import { Separator } from "../Separator/Separator"
 import { Typography } from "../Typography/Typography"
 
 interface NavbarProps {
     homeSection?: React.ReactNode
     endSection?: React.ReactNode
-    hasSeparator?: boolean
     align?: "left" | "right" | "center"
     itemList: NavItemProps[]
 }
@@ -19,54 +17,44 @@ export interface NavItemProps {
 }
 
 export const Navbar = (props: NavbarProps) => {
-    const {
-        endSection,
-        homeSection,
-        hasSeparator,
-        align = "left",
-        itemList,
-    } = props
+    const { endSection, homeSection, align = "left", itemList } = props
 
     return (
         <div
-            className="flex min-h-full items-stretch gap-6 bg-surface-_ px-6 py-2 font-medium text-on-surface-variant"
+            className="flex min-h-full items-center justify-between gap-12 bg-surface-_ p-12 text-h5 font-medium text-on-surface-variant"
             style={{
                 WebkitUserSelect: "none",
                 msUserSelect: "none",
                 userSelect: "none",
             }}
         >
-            {homeSection && (
-                <div className="flex items-center">
+            {(homeSection || align === "center") && (
+                <div
+                    className={`flex ${
+                        align === "left" ? "flex-none" : "flex-1"
+                    }`}
+                >
                     <div>{homeSection}</div>
                 </div>
             )}
 
-            {homeSection && hasSeparator && (
-                <div className="flex items-center">
-                    <Separator orientation="vertical" />
-                </div>
-            )}
-
-            <div
-                className={`flex flex-grow items-center ${
-                    align === "left"
-                        ? "justify-start"
-                        : align === "center"
-                        ? "justify-center"
-                        : "justify-end"
-                }`}
-            >
-                <div className={"flex h-full gap-6"}>
+            <div className={"flex"}>
+                <div className={"flex h-full gap-12"}>
                     {itemList.map((item, i) => (
                         <NavbarItem {...item} key={i} />
                     ))}
                 </div>
             </div>
 
-            <div className="flex items-center">
-                <div>{endSection}</div>
-            </div>
+            {(endSection || align === "center") && (
+                <div
+                    className={`flex ${
+                        align === "right" ? "flex-none" : "flex-1"
+                    } justify-end`}
+                >
+                    <div>{endSection}</div>
+                </div>
+            )}
         </div>
     )
 }
@@ -81,20 +69,51 @@ const NavbarItem = ({ title, itemKey }: NavItemProps) => {
         },
     }
 
+    const indicatorVariants = {
+        active: {
+            width: "100%",
+            transition: {
+                type: "tween",
+                ease: [0.1, 0.7, 0.8, 0.3],
+                duration: 0.5,
+            },
+        },
+        inactive: {
+            width: 0,
+            transition: {
+                type: "tween",
+                ease: [0.9, 0.3, 0.2, 0.7],
+                duration: 0.2,
+            },
+        },
+    }
+
     return (
-        <motion.div
-            whileHover={"hover"}
-            variants={containerVariants}
-            className="flex items-center"
-        >
-            <PolyComp as={NavLink} to={`/${itemKey}`} className="align-middle">
+        <motion.div whileHover={"hover"} variants={containerVariants}>
+            <PolyComp as={NavLink} to={`/${itemKey}`}>
                 <Typography
-                    as={"p"}
-                    className={isActive ? "font-bold text-on-surface-_" : ""}
+                    as={"h5"}
+                    className={`px-1 ${
+                        isActive ? "font-bold text-on-surface-_" : ""
+                    }`}
                 >
                     {title}
                 </Typography>
             </PolyComp>
+
+            <div className="flex justify-center">
+                <motion.div
+                    className="h-1 rounded-s-full bg-_-primary"
+                    variants={indicatorVariants}
+                    animate={isActive ? "active" : "inactive"}
+                />
+
+                <motion.div
+                    className="h-1 rounded-e-full bg-_-primary"
+                    variants={indicatorVariants}
+                    animate={isActive ? "active" : "inactive"}
+                />
+            </div>
         </motion.div>
     )
 }

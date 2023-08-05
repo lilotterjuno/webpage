@@ -114,6 +114,18 @@ const neutralVariantColors = {
     100: "#ffffff",
 }
 
+const fontSize = {
+    "2xs": "0.5635rem",
+    xs: "0.625rem",
+    sm: "0.875rem",
+    base: "1rem",
+    md: "1.25rem",
+    lg: "1.75rem",
+    xl: "2rem",
+    "2xl": "2.5rem",
+    "3xl": "3rem",
+}
+
 export default {
     content: ["./index.html", "./src/**/*.{html,ts,tsx}", "./src/*.{ts,tsx}"],
     theme: {
@@ -126,6 +138,14 @@ export default {
                 xl: "1.25rem",
                 "2xl": "1.5rem",
                 "3xl": "1.75rem",
+            },
+
+            fontSize: {
+                h1: fontSize["3xl"],
+                h2: fontSize["2xl"],
+                h3: fontSize.xl,
+                h4: fontSize.lg,
+                h5: fontSize.md,
             },
 
             colors: {
@@ -203,17 +223,7 @@ export default {
             sans: ["Fredoka", "Comfortaa", "Arial"],
         },
 
-        fontSize: {
-            "2xs": "0.5635rem",
-            xs: "0.625rem",
-            sm: "0.875rem",
-            base: "1rem",
-            md: "1.25rem",
-            lg: "1.75rem",
-            xl: "2rem",
-            "2xl": "2.5rem",
-            "3xl": "3rem",
-        },
+        fontSize: { ...fontSize },
 
         fontWeight: {
             light: "300",
